@@ -7,80 +7,37 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
 <header class="nav">
-    <div class="logo"><a href="index.html">Roy Harmon</a></div>
+    <div class="brand"><a href="index.html">Roy Harmon</a></div>
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="marketing-strategy-consultant.html">Strategy Consulting</a>
         <a href="cmo-for-hire.html">CMO for Hire</a>
         <a href="blog.html">Blog</a>
-        <a href="rice-scoring-tool.html">RICE Tool</a>
+        <a href="rice-scoring-tool.html" class="current">RICE Tool</a>
     </nav>
-    <a class="btn btn-primary" href="#cta">Book a Call</a>
+    <a class="btn-primary" href="#cta">Book a Call</a>
 </header>
-
 <main>
-
-<section class="hero">
-    <h1>RICE Prioritization Tool</h1>
-    <p>Prioritize your projects with Reach, Impact, Confidence and Effort.</p>
-</section>
-
-<section class="section">
-    <h2>How to Use the RICE Framework</h2>
-    <p>Enter your estimates for each factor and see the calculated RICE score. A higher score means a more promising initiative.</p>
-
-    <form id="rice-form" class="form-grid" oninput="calculateRICE()">
-        <div class="form-field">
-            <label for="reach">Reach (users):</label><br>
-            <input type="number" id="reach" min="0" value="100">
-        </div>
-        <div class="form-field">
-            <label for="impact">Impact (0.1–3):</label><br>
-            <input type="number" id="impact" min="0" max="3" step="0.1" value="1">
-        </div>
-        <div class="form-field">
-            <label for="confidence">Confidence (0–100%):</label><br>
-            <input type="number" id="confidence" min="0" max="100" step="1" value="80">
-        </div>
-        <div class="form-field">
-            <label for="effort">Effort (person-months):</label><br>
-            <input type="number" id="effort" min="0.1" step="0.1" value="2">
-        </div>
-    </form>
-    <div class="score-card"><p><strong>RICE Score</strong></p><span class="score-value" id="rice-score">0</span></div>
-</section>
-
-<section class="section">
-    <h2>Make Better Decisions, Faster</h2>
-    <p>The RICE framework helps you compare opportunities objectively. By scoring initiatives based on how many people you reach, how much impact you’ll have, how confident you are, and how much effort it will take, you can prioritize work that delivers the highest value.</p>
-</section>
-
+<section class="hero"><div class="hero__inner"><div class="hero__content"><div class="eyebrow">Interactive Tool</div><h1>RICE <em>Prioritization</em> Tool</h1><p>Score initiatives using Reach, Impact, Confidence, and Effort so you can focus on what matters most.</p></div><div class="hero__media"><div class="hero__media-placeholder"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-7"/></svg><span>RICE GRAPHIC</span></div></div></div></section>
+<section class="section"><div class="container"><h2>How to Use the RICE Framework</h2><p>Enter your estimates for each factor and the calculator will return a RICE score. Higher usually means a stronger opportunity relative to the effort required.</p><div class="form-row"><div><label for="reach">Reach</label><input id="reach" type="number" value="100"></div><div><label for="impact">Impact</label><input id="impact" type="number" step="0.1" value="1"></div><div><label for="confidence">Confidence (%)</label><input id="confidence" type="number" step="1" value="80"></div><div><label for="effort">Effort</label><input id="effort" type="number" step="0.1" value="2"></div></div><div class="kpi-banner"><span class="kpi-banner__label">RICE Score</span><span id="rice-score" class="score">40.00</span></div></div></section>
+<section class="section section--surface"><div class="container grid-2"><div><div class="eyebrow">Why it works</div><h2>Make better decisions, faster.</h2></div><div><p>RICE gives you a simple structure for comparing opportunities. Instead of arguing in circles, you can score initiatives and discuss assumptions directly.</p></div></div></section>
 <script>
 function calculateRICE() {
-    const reach = parseFloat(document.getElementById('reach').value) || 0;
-    const impact = parseFloat(document.getElementById('impact').value) || 0;
-    const confidence = parseFloat(document.getElementById('confidence').value) / 100 || 0;
-    const effort = parseFloat(document.getElementById('effort').value) || 1;
-    const score = ((reach * impact * confidence) / effort).toFixed(2);
-    document.getElementById('rice-score').textContent = score;
+  const reach = parseFloat(document.getElementById('reach').value) || 0;
+  const impact = parseFloat(document.getElementById('impact').value) || 0;
+  const confidence = (parseFloat(document.getElementById('confidence').value) || 0) / 100;
+  const effort = parseFloat(document.getElementById('effort').value) || 1;
+  document.getElementById('rice-score').textContent = ((reach * impact * confidence) / effort).toFixed(2);
 }
-// calculate on load
+['reach', 'impact', 'confidence', 'effort'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calculateRICE);
+});
 calculateRICE();
 </script>
-
 </main>
-
-<footer class="footer">
-    <p>&copy; 2026 Roy Harmon</p>
-    <nav>
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="do-not-share.html">Do Not Sell or Share</a> | 
-        <a href="opt-out-preferences.html">Opt-Out Preferences</a>
-    </nav>
-</footer>
-
+<footer class="footer"><p>&copy; 2026 Roy Harmon</p><nav><a href="privacy.html">Privacy Policy</a><a href="do-not-share.html">Do Not Sell or Share</a><a href="opt-out-preferences.html">Opt-Out Preferences</a></nav></footer>
 </body>
 </html>
